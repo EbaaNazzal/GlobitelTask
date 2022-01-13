@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject SignInManager<AppUser> signInManager
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var curUiCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var cultureItems = LocOptions.Value.SupportedUICultures
+.Select(c => new SelectListItem { Value = c.Name, Text = localizer.GetString(c.Name) })
+.ToList();
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LayoutPage2</title>
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width" />
+    @if (curUiCulture == "en")
+    {
+        <link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+    }
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/twitter-bootstrap/js/bootstrap.js"></script>
+    <style>
+        .errorMsg {
+            color: red;
+            margin-top: 2px;
+        }
+    </style>
+    @RenderSection("Head", false)
+</head>
+<body>
+    <span>@localizer["Language"]</span>
+    <div class="selectLanguage-margin" style="display: inline-block;">
+        <form asp-controller="Culter" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-horizontal">
+            <select name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+            </select>
+        </form>
+    </div>
+    @RenderSection("Body", false)
+</body>
+</html>

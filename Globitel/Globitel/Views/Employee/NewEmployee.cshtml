@@ -1,0 +1,136 @@
+﻿@model VmEmployee
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = "NewEmployee";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+@section Head{
+    <style>
+        .create-btn {
+            background-color: #f1f1f1;
+            border: #c1c1c1 1px solid;
+            width: 118px;
+            float: right;
+        }
+    </style>
+}
+@section Body{
+    <form method="post" enctype="multipart/form-data">
+        <div class="container">
+
+            <div class="row">
+                <h3>@localizer["AddEmployee"]</h3>
+                <input type="hidden" asp-for="employee.Id" />
+            </div>
+            <div class="row" style="margin-top: 10px; background-color: white; padding: 36px; border-radius: 10px;">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["FirstName"]</label>
+                            <input type="text" id="txtFirstName" class="form-control" asp-for="employee.FirstName" />
+                            <span asp-validation-for="employee.FirstName" class="errorMsg"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["LastName"]</label>
+                            <input type="text" id="txtFirstName" class="form-control" asp-for="employee.LastName" />
+                            <span asp-validation-for="employee.LastName" class="errorMsg"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["Birthdate"]</label>
+                            <input type="date" class="form-control" asp-for="employee.DateOfBirth" />
+                            <span asp-validation-for="employee.DateOfBirth" class="errorMsg"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label> @localizer["Email"] </label>
+                            <input type="text" class="form-control" asp-for="employee.Email" />
+                            <span asp-validation-for="employee.Email" class="errorMsg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["Phone"]</label>
+                            <input type="text" class="form-control" asp-for="employee.Phone" />
+                            <span asp-validation-for="employee.Phone" class="errorMsg"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class=" row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["Department"]</label>
+                            <select class="form-control" asp-items='new SelectList(Model.departments,"Id","Name")' asp-for="employee.DepartmentId"></select>
+                            <span asp-validation-for="employee.DepartmentId" class="errorMsg"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["Status"]</label>
+                            <select class="form-control" asp-for="employee.Status">
+                                <option>@localizer["Active"]</option>
+                                <option>@localizer["Inactive"]</option>
+                            </select>
+                            <span asp-validation-for="employee.Status" class="errorMsg"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@localizer["DateOfJoining"]</label>
+                            <input type="date" class="form-control" asp-for="employee.DateOfJoining" />
+                            <span asp-validation-for="employee.DateOfJoining" class="errorMsg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label>@localizer["Gender"]</label>
+                            <input type="radio" class="form-check" value="1" asp-for="employee.Gender" /> @localizer["Female"]
+                            <input type="radio" class="form-check" value="2" asp-for="employee.Gender" />@localizer["Male"]
+                            <span asp-validation-for="employee.Gender" class="errorMsg"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="file" id="upload" asp-for="EmployeePhoto" style="display:none" />
+                            <label for="upload" class="btn btn-outline-secondary create-btn">@localizer["UploadPhoto"]</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 17px">
+                    @{ if ((int)ViewData["flag"] == 0)
+                        {
+                            <div class="col-lg-6">
+                                <input type="submit" class="btn btn-primary" style="width: 100%" value="@localizer["Update"]" asp-action="Update" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-6">
+                                <input type="submit" class="btn btn-primary" style="width: 100%" value="@localizer["Create"]" asp-action="Create" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+

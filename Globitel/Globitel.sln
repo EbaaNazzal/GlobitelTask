@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Globitel", "Globitel\Globitel.csproj", "{57DF8928-9EAC-427D-8078-22636DFED128}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57DF8928-9EAC-427D-8078-22636DFED128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57DF8928-9EAC-427D-8078-22636DFED128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57DF8928-9EAC-427D-8078-22636DFED128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57DF8928-9EAC-427D-8078-22636DFED128}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6620C7D8-D50D-42F8-AA17-90B077D382D0}
+	EndGlobalSection
+EndGlobal
